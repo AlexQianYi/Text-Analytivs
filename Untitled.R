@@ -32,6 +32,22 @@ ACQcl <- tm_map(ACQlow, content_transformer(removeNumPunct))
 myStopword <- c(stopwords('english'))
 ACQstop <- tm_map(ACQcl, removeWords, myStopword)
 inspect(ACQstop[1:2])
+## find terms with a frequency of 5 or more
+ACQtdm2 <- TermDocumentMatrix(ACQstop, control = list(wordLengths = c(1, Inf)))
+ACQtdm2
+freq.terms <- findFreqTerms(ACQtdm2, lowfreq = 5)
+freq.terms
+## find words associated with "states"
+findAssocs(ACQtdm2, "states", 0.25)
+## term frequency
+term.freq <- rowSums(as.matrix(ACQtdm2))
+term.freq <- subset(term.freq, term.freq >= 5)
+df <- data.frame(term = names(term.freq), freq = term.freq)
+term.freq
+df
+########### plotting ###########
+
+                              
 
 
 ###########################################
