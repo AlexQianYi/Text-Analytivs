@@ -1,5 +1,6 @@
 install.packages("tm")
 install.packages("ggplot2")
+install.packages("wordcloud")
 
 library(tm)
 library(ggplot2)
@@ -54,12 +55,20 @@ df
 inspect(acq)
 
 ############################################
-## Q(c) dendrogram
+## Q(c) 
+## dendrogram
 tdm2 <- removeSparseTerms(ACQdtm, sparse = 0.50)
 tdm2
 dd <- dist(scale(tdm2), method = "euclidean")
 hc <- hclust(dd, method = "ward.D2")
 plot(hc)
+## WordCloud
+m1 <- as.matrix(tdm2)
+word.freq <- sort(rowSums(m1), decreasing = T)
+word.freq
+library(wordcloud)
+
+
 
 writeCorpus(DocData, path = "")
 
