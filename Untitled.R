@@ -35,6 +35,8 @@ inspect(ACQstop[1:2])
 
 
 ###########################################
+## Q(b) use inspect
+inspect(acq)
 
 writeCorpus(DocData, path = "")
 
