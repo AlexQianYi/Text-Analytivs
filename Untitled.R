@@ -1,0 +1,3 @@
+install.packages("tm")
+
+setwd
