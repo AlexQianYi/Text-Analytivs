@@ -1,6 +1,8 @@
 install.packages("tm")
+install.packages("ggplot2")
 
 library(tm)
+library(ggplot2)
 
 ## corpus of 50 documents
 DocData<-data("acq")
@@ -45,14 +47,19 @@ term.freq <- subset(term.freq, term.freq >= 5)
 df <- data.frame(term = names(term.freq), freq = term.freq)
 term.freq
 df
-########### plotting ###########
-
-                              
 
 
 ###########################################
 ## Q(b) use inspect
 inspect(acq)
+
+############################################
+## Q(c) dendrogram
+tdm2 <- removeSparseTerms(ACQdtm, sparse = 0.50)
+tdm2
+dd <- dist(scale(tdm2), method = "euclidean")
+hc <- hclust(dd, method = "ward.D2")
+plot(hc)
 
 writeCorpus(DocData, path = "")
 
