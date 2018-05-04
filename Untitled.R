@@ -85,7 +85,18 @@ library(textreuse)
 docI <- acq[[7]]
 charDoc <- as.character(docI)
 # print every word find the longest one
-tokenize_words(charDoc)
+max_word_len = 0
+max_word = ""
+for (word in tokenize_words(charDoc)){
+  print(word)
+  print(nchar(word))
+  print(max_word_len)
+  if(nchar(word) > max_word_len){
+    max_word = word
+    max_word_len = nchar(word)
+  }
+}
+print(max_word)
 # print the longest sentence in every file
 max_sentence_len = 0
 max_sentence = ""
