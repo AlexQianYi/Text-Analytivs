@@ -79,10 +79,14 @@ wordcloud(words = names(word.freq), freq = word.freq, min.freq = 3, random.order
 install.packages("textreuse")
 install.packages("wordnet")
 install.packages("zipfR")
+install.packages("tidyverse")
+install.packages("tokenizers")
 ## see the content of document
 as.character(acq[[7]])
 ## Q(d)
 library(textreuse)
+library(tidyverse)
+library(tokenizers)
 ## get one of 15 largest documents
 docI <- acq[[7]]
 charDoc <- as.character(docI)
@@ -135,6 +139,12 @@ tokenize_sentences(as.character(DocINoPun))
 ## Q(g)
 ## print part of speech of every word
 library(wordnet)
+docI <- acq[[7]]
+charDoc <- as.character(docI)
+sentences <- tokenize_sentences(charDoc)
+sentences_words <- sapply(sentences, tokenize_words)
+sentences
+
 
 ##############################################################
 ## Q(h)
