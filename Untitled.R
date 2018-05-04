@@ -136,3 +136,12 @@ tokenize_sentences(as.character(DocINoPun))
 ## print part of speech of every word
 library(wordnet)
 
+##############################################################
+## Q(h)
+## print word frequency
+library(zipfR)
+testFre <- termFreq(acq[[7]])
+rt_pos = as.data.frame(testFre)
+Vm = rt_pos[1]
+testFre
+
