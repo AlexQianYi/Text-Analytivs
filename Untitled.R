@@ -1,6 +1,7 @@
 install.packages("tm")
 install.packages("ggplot2")
 install.packages("wordcloud")
+install.packages("hash")
 
 library(tm)
 library(ggplot2)
@@ -53,7 +54,8 @@ df
 ###########################################
 ## Q(b) use inspect
 ## 15 largest document
-## 20:2457 7:3635 4:2308 1:1287 21:1009 23:1873 26:3516 30:3109 36:1465 .......
+## 50:1068, 47:3013, 44:1022, 42:1607, 36:1043, 34:1465, 29:3109, 25:3516, 22:1873, 20:1009, 19:2457
+## 18:871, 7:3635, 4:2308, 1:1287
 inspect(acq)
 
 ############################################
@@ -127,4 +129,10 @@ rownames(mytable) <- c("No1", "No2")
 fileNoPun <- tm_map(acq, content_transformer(removeNumPunct))
 DocINoPun <- fileNoPun[[7]]
 tokenize_sentences(as.character(DocINoPun))
+
+
+#############################################################
+## Q(g)
+## print part of speech of every word
+library(wordnet)
 
