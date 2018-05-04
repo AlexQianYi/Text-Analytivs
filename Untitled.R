@@ -52,12 +52,14 @@ df
 
 ###########################################
 ## Q(b) use inspect
+## 15 largest document
+## 20:2457 7:3635 4:2308 1:1287 21:1009 23:1873 26:3516 30:3109 36:1465 .......
 inspect(acq)
 
 ############################################
 ## Q(c) 
 ## dendrogram
-tdm2 <- removeSparseTerms(ACQdtm, sparse = 0.50)
+tdm2 <- removeSparseTerms(ACQtdm2, sparse = 0.50)
 tdm2
 dd <- dist(scale(tdm2), method = "euclidean")
 hc <- hclust(dd, method = "ward.D2")
@@ -67,11 +69,30 @@ m1 <- as.matrix(tdm2)
 word.freq <- sort(rowSums(m1), decreasing = T)
 word.freq
 library(wordcloud)
+pal <- brewer.pal(9, "BuGn")
+pal <- pal[-(1:4)]
+wordcloud(words = names(word.freq), freq = word.freq, min.freq = 3, random.order = F, colors = pal)
 
+######################################################
+install.packages("textreuse")
+install.packages("wordnet")
+install.packages("zipfR")
+## see the content of document
+as.character(acq[[7]])
+## Q(d)
+library(textreuse)
+## get one of 15 largest documents
+docI <- acq[[7]]
+charDoc <- as.character(docI)
+# print every word find the longest one
+tokenize_words(charDoc)
+# print every sentences find the longest one
+tokenize_sentences(charDoc)
 
+## Q(e)
+## draw a table show the length of longest sentence
+length_array <- c(15, 16)    ## change length here
+length_data <- data.frame(len = length_array[1:2])
+mytable <- cbind(sites = c("file 1", "file 2"), length_data[1:2,])   ## change file name here
+rownames(mytable) <- c("No1", "No2")
 
-writeCorpus(DocData, path = "")
-
-setwd("Documents/GitHub/Text-Analytivs")
-SAT<-VCorpus(DirSource(".", ignore.case = TRUE, mode="text"))
-inspect(SAT)
