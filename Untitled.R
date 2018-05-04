@@ -86,8 +86,21 @@ docI <- acq[[7]]
 charDoc <- as.character(docI)
 # print every word find the longest one
 tokenize_words(charDoc)
-# print every sentences find the longest one
-tokenize_sentences(charDoc)
+# print the longest sentence in every file
+max_sentence_len = 0
+max_sentence = ""
+for (line in tokenize_sentences(charDoc)){
+  count = 0
+  for (words in tokenize_words(line)){
+    count=count+1
+  }
+  print(line)
+  if(count > max_len){
+    max_sentence = line
+    max_sentence_len = count
+  }
+}
+print(max_sentence)
 
 ## Q(e)
 ## draw a table show the length of longest sentence
@@ -96,3 +109,31 @@ length_data <- data.frame(len = length_array[1:2])
 mytable <- cbind(sites = c("file 1", "file 2"), length_data[1:2,])   ## change file name here
 rownames(mytable) <- c("No1", "No2")
 
+## Q(f)
+## remove punctuation
+max_len = 0
+max_sentence = ""
+for (line in tokenize_sentences(charDoc)){
+  count = 0
+  for (words in tokenize_words(line)){
+    count=count+1
+  }
+  print(line)
+  if(count > max_len){
+    max_sentence = line
+    max_len = count
+  }
+}
+print(max_sentence)
+
+
+for line in as.character(acq[[7]]):
+  label, sentence = line.strip().split("\t")
+  words = nltk.word_toknize(sentence.lower())
+  if len(words) > maxlen:
+    maxlen = le(words)
+  for word in words:
+    word.freq(word) += 1
+  num_recs += 1
+print('max_len', maxlen)
+print('nb_words', len(word_freqs))
