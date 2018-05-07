@@ -91,11 +91,9 @@ library(tokenizers)
 docI <- acq[[7]]
 charDoc <- as.character(docI)
 # print longest word in file
-max_word_len = 0
+max_word_len = 2
 max_word = ""
 for (word in tokenize_words(charDoc)){
-  print(word)
-  print(nchar(word))
   print(max_word_len)
   if(nchar(word) > max_word_len){
     max_word = word
@@ -154,4 +152,42 @@ testFre <- termFreq(acq[[7]])
 rt_pos = as.data.frame(testFre)
 Vm = rt_pos[1]
 testFre
+
+####################################################
+## search word
+library(tm)
+library(textreuse)
+
+target = "capital"
+file_index = 1
+find = 0
+result_index = 1
+for(i in 1:50){
+  File <- acq[[file_index]]
+  charFile <- as.character(File)
+  line_index = 1
+  for(line in tokenize_sentences(charFile)){
+    
+    word_index = 1
+    for(word in tokenize_words(line)){
+      if(word == target){
+        print(paste(paste("No.", as.character(result_index)), "result"))
+        print(paste(paste("No.", as.character(file_index)), "file"))
+        print(paste(paste("No.", as.character(line_index)), "line"))
+        print(paste(paste("No.", as.character(word_index)), "word"))
+        find = 1
+        result_index = result_index + 1
+        print('---------------')
+      }
+      word_index = word_index + 1
+    }
+    line_index = line_index + 1
+  }
+  file_index = file_index + 1
+}
+
+if(find == 0){
+ print("no such word!") 
+}
+
 
